@@ -1,0 +1,19 @@
+Giai đoạn 3: Lập trình Backend (Tuần 4 – 6)
+
+Công việc thực hiện:
+
+Khởi tạo project ASP.NET MVC bằng Visual Studio.
+
+Xây dựng các Model – Controller – View cho chức năng quản lý lễ hội.
+
+Kết nối cơ sở dữ liệu bằng Entity Framework hoặc ADO.NET.
+
+Xây dựng các chức năng:
+
+Quản lý (CRUD) lễ hội dành cho Admin.
+
+Hiển thị danh sách lễ hội cho người dùng.
+
+Hiển thị chi tiết lễ hội (tên, mô tả, hình ảnh, ngày tháng,…).
+
+Kiểm tra hoạt động các API, Controller và liên kết dữ liệu.
