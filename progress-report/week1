@@ -1,1 +1,13 @@
+Giai đoạn 1: Phân tích và xác định yêu cầu (Tuần 1)
 
+Công việc thực hiện:
+
+Thu thập tài liệu về văn hóa và các lễ hội của người Khmer Nam Bộ.
+
+Xác định mục tiêu của hệ thống: số hóa thông tin lễ hội, cung cấp Website tra cứu và giới thiệu.
+
+Xác định nhóm đối tượng người dùng: Khách, Người dùng đăng nhập và Quản trị viên.
+
+Phân tích chức năng cần có: xem lễ hội, tìm kiếm, quản lý bài viết, quản lý người dùng,…
+
+Xây dựng tài liệu mô tả yêu cầu phần mềm (Software Requirement Specification – SRS).
