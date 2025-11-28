@@ -1,0 +1,21 @@
+Giai đoạn 2: Thiết kế hệ thống (Tuần 2 – 3)
+
+Công việc thực hiện:
+
+Thiết kế cơ sở dữ liệu SQL Server, bao gồm các bảng chính:
+
+Festivals: ID, Tên lễ hội, Mô tả, Ảnh, Video, Ngày diễn ra, Địa điểm.
+
+Admins: ID, Username, Password, Email.
+
+Thiết kế giao diện tổng thể sử dụng HTML + Bootstrap (trang chủ, menu, banner, footer).
+
+Vẽ các tài liệu mô hình hóa:
+
+Sơ đồ Use Case
+
+Sơ đồ ERD (Entity Relationship Diagram)
+
+Sơ đồ Class Diagram
+
+Hoàn thiện kiến trúc hệ thống theo mô hình ASP.NET MVC.
