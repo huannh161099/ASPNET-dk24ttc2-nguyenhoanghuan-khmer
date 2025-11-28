@@ -28,18 +28,6 @@ Website giúp người xem:
 
 ---
 
-## 🏗️ Cấu Trúc Dự Án (ASP.NET MVC)
-/KhmerFestival/
-├── Controllers/ → Chứa các file điều khiển (FestivalController, HomeController)
-├── Models/ → Chứa các lớp mô hình dữ liệu (Festival.cs, Admin.cs)
-├── Views/ → Giao diện người dùng (Home, Festival, Shared)
-├── wwwroot/ → Lưu hình ảnh, CSS, JS
-├── App_Data/ → Cơ sở dữ liệu (nếu dùng LocalDB)
-├── appsettings.json → Cấu hình kết nối cơ sở dữ liệu
-└── README.md → Mô tả dự án
-
----
-
 ## 🚀 Các Giai Đoạn Thực Hiện Dự Án
 
 ### **Giai đoạn 1: Phân tích và xác định yêu cầu (Tuần 1)**
@@ -94,14 +82,6 @@ Website giúp người xem:
 - Website ASP.NET MVC hoạt động ổn định, hiển thị thông tin chi tiết về các lễ hội Khmer.  
 - Giao diện đẹp, dễ sử dụng, có phân quyền quản trị.  
 - Nội dung mang giá trị văn hóa – giáo dục cao.  
-
----
-
-## 📚 Tài Liệu Tham Khảo
-- Microsoft Docs: [https://learn.microsoft.com/en-us/aspnet/mvc/overview/](https://learn.microsoft.com/en-us/aspnet/mvc/overview/)  
-- Tài liệu Bootstrap 5: [https://getbootstrap.com/docs/5.0/](https://getbootstrap.com/docs/5.0/)  
-- Nguồn tư liệu về văn hóa Khmer: baotravinh.vn, tapchivanhoa.vn  
-- Slide bài giảng môn Lập trình Web – Trường Đại học Trà Vinh
 
 ---
 
