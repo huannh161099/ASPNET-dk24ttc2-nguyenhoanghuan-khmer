@@ -1,0 +1,15 @@
+Giai đoạn 5: Kiểm thử và sửa lỗi (Tuần 9 – 10)
+
+Công việc thực hiện:
+
+Kiểm thử chức năng CRUD của Admin.
+
+Kiểm thử chức năng xem danh sách & xem chi tiết lễ hội.
+
+Kiểm tra liên kết cơ sở dữ liệu, ngoại lệ và các luồng xử lý.
+
+Kiểm thử giao diện và trải nghiệm người dùng.
+
+Sửa lỗi phát sinh trong quá trình thử nghiệm.
+
+Tối ưu mã nguồn và bảo mật (đặc biệt form đăng nhập).
