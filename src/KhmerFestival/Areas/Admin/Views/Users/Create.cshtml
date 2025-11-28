@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Thêm người dùng";
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold text-success">Thêm người dùng</h4>
+    <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+</div>
+
+@if (TempData["Err"] != null)
+{
+    <div class="alert alert-danger">@TempData["Err"]</div>
+}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body">
+        <form asp-area="Admin" asp-controller="Users" asp-action="Create" method="post">
+            @Html.AntiForgeryToken()
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" required />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Tên hiển thị</label>
+                    <input name="displayName" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Mật khẩu</label>
+                    <input name="password" type="password" class="form-control" required />
+                </div>
+                <div class="col-md-6 d-flex align-items-end">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="isAdmin" id="isAdmin">
+                        <label class="form-check-label" for="isAdmin">Cấp quyền Admin</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button class="btn btn-success">
+                    Tạo
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+}

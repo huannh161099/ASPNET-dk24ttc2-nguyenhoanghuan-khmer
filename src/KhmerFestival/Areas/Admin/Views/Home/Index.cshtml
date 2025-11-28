@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Trang quản trị";
+}
+<div class="row g-3">
+    <div class="col-md-6">
+        <a asp-area="Admin" asp-controller="Posts" asp-action="Index" class="text-decoration-none">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Quản lý bài viết</h5>
+                    <p class="text-muted mb-0">Tạo/sửa/xóa bài viết lễ hội.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a asp-area="Admin" asp-controller="Users" asp-action="Index" class="text-decoration-none">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Quản lý người dùng</h5>
+                    <p class="text-muted mb-0">Danh sách & phân quyền.</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,133 @@
+﻿@model KhmerFestival.Models.Post
+@{
+    ViewData["Title"] = Model.Title;
+    var related = ViewBag.Related as IEnumerable<KhmerFestival.Models.Post> ?? Enumerable.Empty<KhmerFestival.Models.Post>();
+    var allComments = (IEnumerable<KhmerFestival.Models.Comment>)(ViewBag.Comments ?? Enumerable.Empty<KhmerFestival.Models.Comment>());
+    var topLevel = allComments.Where(c => c.ParentId == null).OrderBy(c => c.CreatedAt).ToList();
+
+    
+    ViewData["AllComments"] = allComments;
+}
+
+<div class="container py-4">
+
+    
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <article class="card border-0 shadow-sm">
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Model.ImageUrl" class="card-img-top rounded-top" style="max-height:400px;object-fit:cover;" />
+                }
+                <div class="card-body">
+                    <h1 class="h3 fw-bold mb-3">@Model.Title</h1>
+                    <div class="text-muted mb-3">
+                        <i class="fa-regular fa-calendar me-1"></i>
+                        @(Model.PublishedAt?.ToLocalTime().ToString("dd/MM/yyyy") ?? "-")
+                    </div>
+
+                    <div class="content fs-5">
+                        @Html.Raw(Model.Content)
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        
+        <aside class="col-lg-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <h5 class="fw-bold mb-3"><i class="fa-regular fa-newspaper me-1 text-primary"></i>Bài viết mới</h5>
+                    @foreach (var p in related)
+                    {
+                        <div class="d-flex align-items-center mb-3 hover-shadow-sm">
+                            @if (!string.IsNullOrEmpty(p.ImageUrl))
+                            {
+                                <a asp-controller="Posts" asp-action="Details" asp-route-slug="@p.Slug">
+                                    <img src="@p.ImageUrl" class="me-3 rounded" style="width:80px;height:60px;object-fit:cover;" />
+                                </a>
+                            }
+                            <div class="flex-grow-1">
+                                <a asp-controller="Posts" asp-action="Details" asp-route-slug="@p.Slug"
+                                   class="fw-semibold text-decoration-none text-dark lh-sm d-block">
+                                    @p.Title
+                                </a>
+                                <div class="small text-muted">@p.PublishedAt?.ToLocalTime().ToString("dd/MM/yyyy")</div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </aside>
+    </div>
+
+   
+    <div class="mt-4">
+        <a class="text-decoration-none" asp-area="" asp-controller="Posts" asp-action="Index">
+            <i class="fa-solid fa-arrow-left-long me-1"></i> Về trang công khai
+        </a>
+    </div>
+
+    
+    <hr class="my-4" />
+    <section id="comments">
+        <h5 class="fw-bold mb-3"><i class="fa-regular fa-comments me-2 text-primary"></i>Bình luận</h5>
+
+        @if (TempData["Err"] is string err && !string.IsNullOrEmpty(err))
+        {
+            <div class="alert alert-danger">@err</div>
+        }
+        @if (TempData["Ok"] is string ok && !string.IsNullOrEmpty(ok))
+        {
+            <div class="alert alert-success">@ok</div>
+        }
+
+        @if (User.Identity?.IsAuthenticated ?? false)
+        {
+            <form asp-controller="Comments" asp-action="Create" method="post" class="mb-4">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="postId" value="@Model.Id" />
+                <textarea name="content" rows="3" class="form-control" placeholder="Chia sẻ cảm nghĩ của bạn..."></textarea>
+                <div class="mt-2">
+                    <button class="btn btn-primary px-4"><i class="fa-solid fa-paper-plane me-1"></i>Gửi bình luận</button>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-info">
+                <i class="fa-regular fa-circle-user me-1"></i>
+                Vui lòng <a asp-area="Identity" asp-page="/Account/Login">đăng nhập</a> để bình luận.
+            </div>
+        }
+
+        @if (!topLevel.Any())
+        {
+            <div class="text-muted">Chưa có bình luận nào.</div>
+        }
+        else
+        {
+            @foreach (var c in topLevel)
+            {
+                @await Html.PartialAsync("_CommentThread", c)
+            }
+        }
+    </section>
+
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+    <script>
+        
+        function toggleReply(id) {
+            const el = document.getElementById('reply-form-' + id);
+            if (!el) return;
+            el.classList.toggle('d-none');
+            if (!el.classList.contains('d-none')) {
+                const ta = el.querySelector('textarea');
+                if (ta) ta.focus();
+            }
+        }
+    </script>
+}

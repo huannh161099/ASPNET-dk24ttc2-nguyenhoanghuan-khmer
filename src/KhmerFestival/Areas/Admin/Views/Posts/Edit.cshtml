@@ -1,0 +1,92 @@
+﻿@model KhmerFestival.Models.Post
+@{
+    ViewData["Title"] = "Sửa bài viết";
+}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h4 class="fw-bold text-primary"><i class="fa-solid fa-pen-to-square me-2"></i>Sửa bài viết</h4>
+    <a asp-area="Admin" asp-controller="Posts" asp-action="Index" class="btn btn-outline-secondary">Quay lại</a>
+</div>
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body">
+        <form asp-area="Admin" asp-controller="Posts" asp-action="Edit" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Id" />
+            <div class="row g-3">
+                <div class="col-md-8">
+                    <label class="form-label">Tiêu đề</label>
+                    <input asp-for="Title" class="form-control" id="titleInput" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Slug</label>
+                    <input asp-for="Slug" class="form-control" id="slugInput" />
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Tóm tắt</label>
+                    <textarea asp-for="Summary" class="form-control" rows="2"></textarea>
+                </div>
+                <div class="col-12">
+                    <label class="form-label">Nội dung</label>
+                    <textarea asp-for="Content" class="form-control" rows="8"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Ảnh hiện tại</label><br />
+                    @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                    {
+                        <img src="@Model.ImageUrl" style="height:120px;border-radius:.5rem;object-fit:cover;" />
+                    }
+                    else
+                    {
+
+                        <span class="text-muted">Chưa có ảnh</span>
+                    }
+                    <div class="mt-2">
+                        <input name="imageFile" class="form-control" type="file" accept="image/*" onchange="previewImg(this)" />
+                        <img id="preview" style="display:none;height:120px;margin-top:8px;border-radius:.5rem;object-fit:cover;" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Xuất bản</label>
+                    <div class="form-check form-switch">
+                        <input asp-for="IsPublished" class="form-check-input" />
+                        <label class="form-check-label">Đánh dấu xuất bản</label>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Ngày đăng</label>
+                    <input asp-for="PublishedAt" class="form-control" type="datetime-local" />
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button class="btn btn-primary"> Cập nhật</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        const slugify = s => s
+            .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+            .replace(/đ/g,'d').replace(/Đ/g,'D')
+            .toLowerCase().replace(/[^a-z0-9\s-]/g,'')
+            .trim().replace(/\s+/g,'-').replace(/-+/g,'-');
+
+        document.getElementById('titleInput').addEventListener('input', e => {
+            const slugBox = document.getElementById('slugInput');
+            if (!slugBox.value) slugBox.value = slugify(e.target.value);
+        });
+
+        function previewImg(input){
+            const img = document.getElementById('preview');
+            if(input.files && input.files[0]){
+                const reader = new FileReader();
+                reader.onload = e => { img.src = e.target.result; img.style.display='block'; };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+}
